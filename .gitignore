@@ -1,7 +1,11 @@
 apache-tomcat-7.0.63/logs
+apache-tomcat-7.0.63/logs/**
 apache-tomcat-7.0.63/work
+apache-tomcat-7.0.63/work/**
 
 apache-tomcat-7.0.63-src/target
+apache-tomcat-7.0.63-src/target/**
 
 .idea/*
 tomcat-study.iml
+apache-tomcat-7.0.63-src/Tomcat7.0.iml
