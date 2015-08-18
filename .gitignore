@@ -19,6 +19,5 @@ apache-tomcat-7.0.63/work
 
 apache-tomcat-7.0.63-src/target
 
-
-*.idea
+.idea/
 tomcat-study.iml
