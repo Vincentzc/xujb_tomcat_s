@@ -26,6 +26,13 @@ import org.apache.juli.logging.LogFactory;
 import org.apache.tomcat.util.ExceptionUtils;
 import org.apache.tomcat.util.res.StringManager;
 
+/*
+* xujb:
+* 生命周期的管理
+* 每个阶段都有状态
+* 可以增加监听器
+* 可以增加响应事件
+* */
 
 /**
  * Base implementation of the {@link Lifecycle} interface that implements the
