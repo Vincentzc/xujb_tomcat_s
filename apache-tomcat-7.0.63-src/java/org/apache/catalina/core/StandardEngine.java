@@ -16,25 +16,7 @@
  */
 package org.apache.catalina.core;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.util.Locale;
-import java.util.concurrent.atomic.AtomicReference;
-
-import org.apache.catalina.AccessLog;
-import org.apache.catalina.Container;
-import org.apache.catalina.ContainerEvent;
-import org.apache.catalina.ContainerListener;
-import org.apache.catalina.Context;
-import org.apache.catalina.Engine;
-import org.apache.catalina.Globals;
-import org.apache.catalina.Host;
-import org.apache.catalina.Lifecycle;
-import org.apache.catalina.LifecycleEvent;
-import org.apache.catalina.LifecycleException;
-import org.apache.catalina.LifecycleListener;
-import org.apache.catalina.Realm;
-import org.apache.catalina.Service;
+import org.apache.catalina.*;
 import org.apache.catalina.connector.Request;
 import org.apache.catalina.connector.Response;
 import org.apache.catalina.realm.NullRealm;
@@ -42,10 +24,22 @@ import org.apache.catalina.util.ServerInfo;
 import org.apache.juli.logging.Log;
 import org.apache.juli.logging.LogFactory;
 
+<<<<<<< HEAD
 /*
 * xujb:
 * host的工作,valve的原理
 *
+=======
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.util.Locale;
+import java.util.concurrent.atomic.AtomicReference;
+
+
+/*
+* xujb:
+* 这个类的大部功能都在ContainerBase里面的
+>>>>>>> origin
 *
 * */
 
@@ -74,7 +68,7 @@ public class StandardEngine extends ContainerBase implements Engine {
         /* Set the jmvRoute using the system property jvmRoute */
         try {
             setJvmRoute(System.getProperty("jvmRoute"));
-        } catch(Exception ex) {
+        } catch (Exception ex) {
             log.warn(sm.getString("standardEngine.jvmRouteFail"));
         }
         // By default, the engine will hold the reloading thread
@@ -97,7 +91,7 @@ public class StandardEngine extends ContainerBase implements Engine {
      * The descriptive information string for this implementation.
      */
     private static final String info =
-        "org.apache.catalina.core.StandardEngine/1.0";
+            "org.apache.catalina.core.StandardEngine/1.0";
 
 
     /**
@@ -105,7 +99,8 @@ public class StandardEngine extends ContainerBase implements Engine {
      */
     private Service service = null;
 
-    /** Allow the base dir to be specified explicitly for
+    /**
+     * Allow the base dir to be specified explicitly for
      * each engine. In time we should stop using catalina.base property -
      * otherwise we loose some flexibility.
      */
@@ -122,7 +117,7 @@ public class StandardEngine extends ContainerBase implements Engine {
      * the intended host and context.
      */
     private final AtomicReference<AccessLog> defaultAccessLog =
-        new AtomicReference<AccessLog>();
+            new AtomicReference<AccessLog>();
 
     // ------------------------------------------------------------- Properties
 
@@ -171,15 +166,15 @@ public class StandardEngine extends ContainerBase implements Engine {
             this.defaultHost = host.toLowerCase(Locale.ENGLISH);
         }
         support.firePropertyChange("defaultHost", oldDefaultHost,
-                                   this.defaultHost);
+                this.defaultHost);
 
     }
-    
+
 
     /**
      * Set the cluster-wide unique identifier for this Engine.
      * This value is only useful in a load-balancing scenario.
-     * <p>
+     * <p/>
      * This property should not be changed once it is set.
      */
     @Override
@@ -220,11 +215,11 @@ public class StandardEngine extends ContainerBase implements Engine {
     }
 
     public String getBaseDir() {
-        if( baseDir==null ) {
-            baseDir=System.getProperty(Globals.CATALINA_BASE_PROP);
+        if (baseDir == null) {
+            baseDir = System.getProperty(Globals.CATALINA_BASE_PROP);
         }
-        if( baseDir==null ) {
-            baseDir=System.getProperty(Globals.CATALINA_HOME_PROP);
+        if (baseDir == null) {
+            baseDir = System.getProperty(Globals.CATALINA_HOME_PROP);
         }
         return baseDir;
     }
@@ -247,7 +242,7 @@ public class StandardEngine extends ContainerBase implements Engine {
 
         if (!(child instanceof Host))
             throw new IllegalArgumentException
-                (sm.getString("standardEngine.notHost"));
+                    (sm.getString("standardEngine.notHost"));
         super.addChild(child);
 
     }
@@ -275,7 +270,7 @@ public class StandardEngine extends ContainerBase implements Engine {
     public void setParent(Container container) {
 
         throw new IllegalArgumentException
-            (sm.getString("standardEngine.notParent"));
+                (sm.getString("standardEngine.notParent"));
 
     }
 
@@ -293,21 +288,21 @@ public class StandardEngine extends ContainerBase implements Engine {
      * Start this component and implement the requirements
      * of {@link org.apache.catalina.util.LifecycleBase#startInternal()}.
      *
-     * @exception LifecycleException if this component detects a fatal error
-     *  that prevents this component from being used
+     * @throws LifecycleException if this component detects a fatal error
+     *                            that prevents this component from being used
      */
     @Override
     protected synchronized void startInternal() throws LifecycleException {
-        
+
         // Log our server identification information
-        if(log.isInfoEnabled())
-            log.info( "Starting Servlet Engine: " + ServerInfo.getServerInfo());
+        if (log.isInfoEnabled())
+            log.info("Starting Servlet Engine: " + ServerInfo.getServerInfo());
 
         // Standard container startup
         super.startInternal();
     }
 
-    
+
     /**
      * Return a String representation of this component.
      */
@@ -329,10 +324,10 @@ public class StandardEngine extends ContainerBase implements Engine {
      */
     @Override
     public void logAccess(Request request, Response response, long time,
-            boolean useDefault) {
+                          boolean useDefault) {
 
         boolean logged = false;
-        
+
         if (getAccessLog() != null) {
             accessLog.log(request, response, time);
             logged = true;
@@ -421,7 +416,7 @@ public class StandardEngine extends ContainerBase implements Engine {
         public void setRequestAttributesEnabled(
                 boolean requestAttributesEnabled) {
             // NOOP
-            
+
         }
 
         @Override
@@ -430,7 +425,7 @@ public class StandardEngine extends ContainerBase implements Engine {
             return false;
         }
     }
-    
+
     protected static final class AccessLogListener
             implements PropertyChangeListener, LifecycleListener,
             ContainerListener {
@@ -441,7 +436,7 @@ public class StandardEngine extends ContainerBase implements Engine {
         private volatile boolean disabled = false;
 
         public AccessLogListener(StandardEngine engine, Host host,
-                Context context) {
+                                 Context context) {
             this.engine = engine;
             this.host = host;
             this.context = context;
