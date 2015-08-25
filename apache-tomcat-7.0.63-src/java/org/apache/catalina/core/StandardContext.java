@@ -5507,7 +5507,7 @@ public class StandardContext extends ContainerBase
             // Create context attributes that will be required
             if (ok) {
                 getServletContext().setAttribute(
-                        JarScanner.class.getName(), getJarScanner());
+                        JarScanner.class.getName(), getJarScanner()); // xujb:standardJarScanner
             }
 
             // Set up the context init params
@@ -5551,7 +5551,8 @@ public class StandardContext extends ContainerBase
                     ok = false;
                 }
             }
-            
+
+
             // Load and initialize all "load on startup" servlets
             if (ok) {
                 if (!loadOnStartup(findChildren())){

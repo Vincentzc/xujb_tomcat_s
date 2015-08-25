@@ -131,6 +131,14 @@ final class StandardHostValve extends ValveBase {
     public final void invoke(Request request, Response response)
         throws IOException, ServletException {
 
+        /*
+        * xujb:
+        * 和Engine一样，调用下层的context，让它来做一些处理
+        * 自身也处理了一些的逻辑
+        *
+        * */
+
+
         // Select the Context to be used for this Request
         Context context = request.getContext();
         if (context == null) {

@@ -24,12 +24,6 @@ import org.apache.catalina.util.ServerInfo;
 import org.apache.juli.logging.Log;
 import org.apache.juli.logging.LogFactory;
 
-<<<<<<< HEAD
-/*
-* xujb:
-* host的工作,valve的原理
-*
-=======
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Locale;
@@ -38,8 +32,9 @@ import java.util.concurrent.atomic.AtomicReference;
 
 /*
 * xujb:
-* 这个类的大部功能都在ContainerBase里面的
->>>>>>> origin
+* host的工作,valve的原理
+* 不群不爱的技术的技术人员，也没什么好说的.20150825
+*
 *
 * */
 

@@ -40,6 +40,13 @@ import org.apache.catalina.valves.ValveBase;
 import org.apache.tomcat.util.ExceptionUtils;
 
 
+/*
+* xujb:
+* 代表一个虚拟主机
+*
+*
+* */
+
 /**
  * Standard implementation of the <b>Host</b> interface.  Each
  * child container must be a Context implementation to process the
@@ -644,6 +651,11 @@ public class StandardHost extends ContainerBase implements Host {
     @Override
     public void addChild(Container child) {
 
+        /*
+        * xujb:
+        * 这个是在部署的过程中才会调用的，就是在部署webapp的时候
+        * 加入的是StandardContext
+        * */
         child.addLifecycleListener(new MemoryLeakTrackingListener());
 
         if (!(child instanceof Context))
@@ -791,6 +803,12 @@ public class StandardHost extends ContainerBase implements Host {
      */
     @Override
     protected synchronized void startInternal() throws LifecycleException {
+
+        /*
+        * xujb:
+        * 只是对自身的valve做一些初始化的工作，其它也没有什么的
+        * 然后就是调用父类的start方法，做一些通用的初始化工作
+        * */
 
         // Set error report valve
         String errorValve = getErrorReportValveClass();
