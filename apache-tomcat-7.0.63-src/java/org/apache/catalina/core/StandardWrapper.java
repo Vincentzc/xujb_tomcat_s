@@ -1119,6 +1119,8 @@ public class StandardWrapper extends ContainerBase
      */
     public synchronized Servlet loadServlet() throws ServletException {
 
+        System.out.println(this.toString());
+
         if (unloading) {
             throw new ServletException(
                     sm.getString("standardWrapper.unloading", getName()));

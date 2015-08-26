@@ -10,5 +10,6 @@
 
     <modules>
         <module>apache-tomcat-7.0.63-src</module>
+        <module>web-demo</module>
     </modules>
 </project>
