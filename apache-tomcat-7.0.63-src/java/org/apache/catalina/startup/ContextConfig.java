@@ -1519,7 +1519,7 @@ public class ContextConfig implements LifecycleListener {
     private void convertJsps(WebXml webXml) {
         Map<String,String> jspInitParams;
         ServletDef jspServlet = webXml.getServlets().get("jsp");
-        if (jspServlet == null) {
+         if (jspServlet == null) {
             jspInitParams = new HashMap<String,String>();
             Wrapper w = (Wrapper) context.findChild("jsp");
             if (w != null) {

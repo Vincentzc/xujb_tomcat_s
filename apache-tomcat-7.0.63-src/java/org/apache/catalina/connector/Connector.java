@@ -38,6 +38,13 @@ import org.apache.tomcat.util.http.mapper.Mapper;
 import org.apache.tomcat.util.res.StringManager;
 
 
+/*
+* xujb:
+* 又是个不干活的类，给逻辑抛给了
+* ProtocolHandler
+*
+* */
+
 /**
  * Implementation of a Coyote connector.
  *
@@ -955,6 +962,11 @@ public class Connector extends LifecycleMBeanBase  {
 
     @Override
     protected void initInternal() throws LifecycleException {
+
+        /*
+        * xujb:
+        * 主要是protocolHandler和mapperListener的初始化
+        * */
 
         super.initInternal();
 
