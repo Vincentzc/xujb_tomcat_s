@@ -958,6 +958,13 @@ public abstract class AbstractHttp11Processor<S> extends AbstractProcessor<S> {
     @Override
     public SocketState process(SocketWrapper<S> socketWrapper)
         throws IOException {
+
+        /*
+        * xujb:
+        * 正式处理状态码，如503啥的就是从这个方法处理的了
+        * */
+
+
         RequestInfo rp = request.getRequestProcessor();
         rp.setStage(org.apache.coyote.Constants.STAGE_PARSE);
 

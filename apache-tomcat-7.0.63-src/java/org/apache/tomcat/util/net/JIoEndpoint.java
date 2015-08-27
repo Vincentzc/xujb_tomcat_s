@@ -139,6 +139,14 @@ public class JIoEndpoint extends AbstractEndpoint<Socket> {
      * Async timeout thread
      */
     protected class AsyncTimeout implements Runnable {
+
+
+        /*
+        * xujb:
+        * 每一秒钟检查一次，是否有超时了的请求，这里的请求是指socket级别的请求，不是高层的httpRequest
+        * 然后处理之
+        * */
+
         /**
          * The background thread that checks async requests and fires the
          * timeout if there has been no activity.
@@ -188,6 +196,14 @@ public class JIoEndpoint extends AbstractEndpoint<Socket> {
      */
     protected class Acceptor extends AbstractEndpoint.Acceptor {
 
+
+        /*
+        * xujb:
+        * 所有的HTTP请求在这里被接收处理
+        * 并且有一个连接上限控制
+        *
+        * */
+
         @Override
         public void run() {
 
@@ -220,6 +236,15 @@ public class JIoEndpoint extends AbstractEndpoint<Socket> {
                         // Accept the next incoming connection from the server
                         // socket
                         socket = serverSocketFactory.acceptSocket(serverSocket);
+
+                        /*
+                        * xujb:
+                        * 这里会有一个阻塞，如果一直没有socket进来就停在这里
+                        * 这个线程默认只启动一个，确实启动一个足够了，
+                        * 因为这里都是非常轻量级的操作
+                        * 重型的操作都是通过线程池执行的
+                        * */
+
                     } catch (IOException ioe) {
                         countDownConnection();
                         // Introduce delay if necessary
@@ -272,6 +297,17 @@ public class JIoEndpoint extends AbstractEndpoint<Socket> {
 
     // ------------------------------------------- SocketProcessor Inner Class
 
+
+    /*
+    * xujb:
+    * 每个socket请求过来的处理实现
+    *
+    * 每个http请求会创建两个此类的实体
+    * 第一次创建执行是status作为OPEN_READ状态,state=OPEN
+    * 第二次创建执行是status作为OPEN_READ状态,state=CLOSED
+    *
+    *
+    * */
 
     /**
      * This class is the equivalent of the Worker, but will simply use in an

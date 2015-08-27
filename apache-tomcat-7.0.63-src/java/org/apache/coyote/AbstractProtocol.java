@@ -580,9 +580,21 @@ public abstract class AbstractProtocol<S> implements ProtocolHandler,
 
             try {
                 if (processor == null) {
+                    /*
+                    * xujb:
+                    * 从回收的processor里取个出来
+                    * 至于怎么样才算是回收的，不是很清楚
+                    * 这里为什么可以在不同的socket中重用
+                    * 因为，process的入参是socket的wrap，已经带了相关的信息了，可以认为processor对socket来说是无状态的
+                    * */
                     processor = recycledProcessors.poll();
                 }
                 if (processor == null) {
+                    /*
+                    * xujb:
+                    * 通过子类具体实现创建方法，这招好用
+                    * 好像之前我也用得比较多
+                    * */
                     processor = createProcessor();
                 }
 

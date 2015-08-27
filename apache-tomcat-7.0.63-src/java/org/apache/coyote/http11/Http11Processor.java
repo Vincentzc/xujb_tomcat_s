@@ -32,6 +32,10 @@ import org.apache.tomcat.util.net.SSLSupport;
 import org.apache.tomcat.util.net.SocketStatus;
 import org.apache.tomcat.util.net.SocketWrapper;
 
+/*
+* xujb:
+* 这才是开始处理http request的业务自理器
+* */
 
 /**
  * Processes HTTP requests.

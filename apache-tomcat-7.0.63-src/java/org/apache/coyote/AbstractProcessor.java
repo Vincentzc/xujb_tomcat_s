@@ -56,6 +56,14 @@ public abstract class AbstractProcessor<S> implements ActionHook, Processor<S> {
     }
 
     public AbstractProcessor(AbstractEndpoint<S> endpoint) {
+
+        /*
+        * xujb:
+        * 这个初始化说明一个问题
+        * 一个processor是可能重用的，而每个processor又分别初始了这个级别下的Request和Response
+        * 这里的级别是指coyote包级别下
+        * */
+
         this.endpoint = endpoint;
         asyncStateMachine = new AsyncStateMachine<S>(this);
         request = new Request();

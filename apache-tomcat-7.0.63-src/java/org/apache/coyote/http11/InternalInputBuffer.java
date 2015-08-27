@@ -31,6 +31,13 @@ import org.apache.tomcat.util.buf.MessageBytes;
 import org.apache.tomcat.util.net.AbstractEndpoint;
 import org.apache.tomcat.util.net.SocketWrapper;
 
+
+/*
+* xujb:
+* 这个类负责从http的流中获取字符数据
+* */
+
+
 /**
  * Implementation of InputBuffer which provides HTTP request header parsing as
  * well as transfer decoding.
@@ -118,6 +125,19 @@ public class InternalInputBuffer extends AbstractInputBuffer<Socket> {
 
         boolean space = false;
 
+        /*
+        * xujb:
+        * 一般的请求头是这样的：
+        * GET /web-demo/ HTTP/1.1
+        * User-Agent: curl/7.41.0
+        * Host: localhost:8080
+        * Accept: *
+        * */
+
+        /*
+        * xujb:
+        * 取GET POST之类的方法
+        * */
         while (!space) {
 
             // Read new bytes if needed
