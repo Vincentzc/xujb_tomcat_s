@@ -378,6 +378,10 @@ public class CoyoteAdapter implements Adapter {
                         org.apache.coyote.Response res)
         throws Exception {
 
+        /*
+        * xujb:
+        * 这是connector级别的Request和Response
+        * */
         Request request = (Request) req.getNote(ADAPTER_NOTES);
         Response response = (Response) res.getNote(ADAPTER_NOTES);
 
@@ -713,6 +717,13 @@ public class CoyoteAdapter implements Adapter {
         boolean mapRequired = true;
 
         while (mapRequired) {
+
+            /*
+            * xujb:
+            * Mapper是用来做uri的匹配并找到相应的处理servlet的
+            * 但是具休怎么初始化，和用了什么的处理方式，不清楚
+            * */
+
             // This will map the the latest version by default
             connector.getMapper().map(serverName, decodedURI, version,
                                       request.getMappingData());

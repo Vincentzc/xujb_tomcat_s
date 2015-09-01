@@ -1068,6 +1068,10 @@ public abstract class AbstractHttp11Processor<S> extends AbstractProcessor<S> {
                     // 500 - Internal Server Error
                     response.setStatus(500);
                     setErrorState(ErrorState.CLOSE_CLEAN, t);
+                    /*
+                    * adapter不知道用来干什么的
+                    *
+                    * */
                     getAdapter().log(request, response, 0);
                 }
             }
@@ -1083,6 +1087,12 @@ public abstract class AbstractHttp11Processor<S> extends AbstractProcessor<S> {
             if (!getErrorState().isError()) {
                 try {
                     rp.setStage(org.apache.coyote.Constants.STAGE_SERVICE);
+
+                    /*
+                    * xujb:
+                    * 据前面注释的意思是
+                    * 在coyote级别的代表servlet的东西
+                    * */
                     adapter.service(request, response);
                     // Handle when the response was committed before a serious
                     // error occurred.  Throwing a ServletException should both
